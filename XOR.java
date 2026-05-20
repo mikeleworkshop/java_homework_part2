@@ -32,6 +32,7 @@ public class XOR {
     // It compares two operands bit by bit using symbol ^
     // It returns 0 if bits are the same 
     // and return the number in decimal if it isn't duplicate in the array.
+    // Linear runtime: O(n).
     public static int singleNumber(int[] nums) {
         
         int result = 0;
