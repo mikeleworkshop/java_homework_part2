@@ -1,5 +1,3 @@
-package part2;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Scanner;
