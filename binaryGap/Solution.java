@@ -1,5 +1,3 @@
-package binaryGap;
-
 class Solution {
     public int solution(int N) {
 
