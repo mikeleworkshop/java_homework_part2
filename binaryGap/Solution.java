@@ -1,7 +1,21 @@
 class Solution {
+    public static String toBinary(int num) {
+        if (num == 0) return "0";
+
+        String binary = "";
+
+        while (num > 0) {
+            int remainder = num % 2;
+            binary = remainder + binary;
+            num = num / 2;
+        }
+        
+        return binary;
+    }
+    
     public int solution(int N) {
 
-        String binary = Integer.toBinaryString(N);
+        String binary = toBinary(N);
 
         int maxGap = 0;
         int count = 0;
