@@ -9,7 +9,7 @@ class Task1Prefix {
     	
     	int prefix;
     	
-    	for (prefix=0; prefix<size; prefix++) { // the full array
+    	for (prefix=0; prefix<size; prefix++) {
     		boolean prefixCoverAll = true;
     		
     		for (int i=0; i<size; i++) { // in A to compare
