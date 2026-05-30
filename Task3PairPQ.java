@@ -17,12 +17,12 @@ public class Task3PairPQ {
 		}
 		
 		
-		return count > 1_000_000_000L ? -1 : count;
+		return (count > 1000000000) ? -1 : count;
 	}
 	
 	public static void main(String[] args) {
 //		int[] A = {2,1,5,-6,9};
-		int[] A = {1_000_000_000, -1_000_000_000, 2};
+		int[] A = {1000000000, -1000000000, 2};
 		
 		long result = solution(A);
 		
