@@ -14,11 +14,9 @@ public class Dominator {
             int N = A.length;
 
 			int[] result = new int[N - 1];
-			int[] error = new int[1];
-			error[0] = -1;
 			
             if (N == 0) {
-				return error;
+				return null;
             }
 
             int candidate = A[0];
@@ -42,7 +40,7 @@ public class Dominator {
             if (occurrences > N / 2.0) {
             	return result;
             } else {
-            	return error;
+            	return null;
             }
         }
 }
