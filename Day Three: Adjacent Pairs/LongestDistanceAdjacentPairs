@@ -1,0 +1,42 @@
+import java.util.Arrays;
+import java.util.*;
+
+public class LongestDistanceAdjacentPairs {
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.solution(new int[]{1,4,7,3,3,5}));                          // expect 4
+    }
+}
+
+class Solution {
+    public int solution(int[] A) {
+        int N = A.length;
+
+        Map<Integer, int[]> firstLast = new HashMap<>();
+        for (int i = 0; i < N; i++) {
+            int[] range = firstLast.get(A[i]);
+            if (range == null) {
+                firstLast.put(A[i], new int[]{i, i});
+            } else {
+                range[1] = i;
+            }
+        }
+
+        Integer[] distinctValues = firstLast.keySet().toArray(new Integer[0]);
+        Arrays.sort(distinctValues);
+
+        int maxDistance = -1;
+
+        for (int k = 0; k + 1 < distinctValues.length; k++) {
+            int[] low  = firstLast.get(distinctValues[k]);
+            int[] high = firstLast.get(distinctValues[k + 1]);
+
+            int dist1 = Math.abs(low[0] - high[1]);
+            int dist2 = Math.abs(low[1] - high[0]);
+
+            maxDistance = Math.max(maxDistance, Math.max(dist1, dist2));
+        }
+
+        return maxDistance;
+    }
+}
