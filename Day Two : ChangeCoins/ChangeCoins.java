@@ -17,17 +17,12 @@ public class ChangeCoins {
     	for (int amount = 1; amount <= money; amount++) {
             for (int coin : coins) {
             	
-            	System.out.println("index = " + index);
-            	System.out.println("coin = " + coin);
-            	
             	if (index == coin) {
             		array[index] = 1;
-            		System.out.println("array[" + index + "] = " + array[index]);
             		
             		if (amount + coin > money) {
                 		changeTimes++;
                 		index = 0;
-                		System.out.println("changeTimes = "  + changeTimes);
                 	}
             	}
             	
