@@ -1,38 +1,57 @@
+import java.util.Arrays;
+
 public class ChangeCoins {
-    static int[] coins = {1, 5, 10, 20};
+    static int[] coins = {10, 5, 20, 1};
+    
+    private static int[] memo;
 
     public static int changeCoins(int money) {
-    	int[] array = new int[money + 1];
-    	
-    	int index = 1;
-    	int changeTimes = 0;
-    	
-//    	if (coins[coins.length] < money) {
-//    		changeTimes = 1;
-//    		amount = coins[coins.length];
-//    	}
-    	
-//    	for (amount; amount <= money; amount++)
-    	
-    	for (int amount = 1; amount <= money; amount++) {
-            for (int coin : coins) {
-            	
-            	if (index == coin) {
-            		array[index] = 1;
-            		
-            		if (amount + coin > money) {
-                		changeTimes++;
-                		index = 0;
-                	}
-            	}
-            	
-            }
-            index++;
+        memo = new int[money + 1];
+        Arrays.fill(memo, -1);
+        
+        return minCoinsRecursive(money);
+    }
+
+    private static int minCoinsRecursive(int money) {
+        // Base Case 1: If money is 0, we need 0 coins
+        if (money == 0) {
+            return 0;
         }
-        return changeTimes;
+        
+        // Base Case 2: If money is negative, this path is invalid
+        if (money < 0) {
+            return -1; 
+        }
+
+        // Check Memo: If already calculated, return the stored result
+        if (memo[money] != -1) {
+            return memo[money];
+        }
+
+        int minCoins = Integer.MAX_VALUE;
+
+        // Try every coin option
+        for (int coin : coins) {
+            int subResult = minCoinsRecursive(money - coin);
+
+            // If the sub-problem has a valid solution, check if it's the minimum
+            if (subResult != -1) {
+                minCoins = Math.min(minCoins, subResult + 1);
+            }
+        }
+
+        // Save the final minimum to the memo array before returning
+        if (minCoins == Integer.MAX_VALUE) {
+            memo[money] = -1;
+        } else {
+            memo[money] = minCoins;
+        }
+
+        return memo[money];
     }
 
     public static void main(String[] args) {
-        System.out.println(changeCoins(31));
+        int amount = 14;
+        System.out.println("Minimum coins for " + amount + ": " + changeCoins(amount));
     }
 }
