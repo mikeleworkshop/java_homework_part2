@@ -48,9 +48,6 @@ public class BuyTickets {
 				}
 				
 				memo[i] = Math.min(memo[i], memo[i - ticket] + cost);
-				
-				System.out.printf("memo[i:%d] = %d\n", i, memo[i]);
-				System.out.printf("memo[%d - %d] + %d = %d\n", i, ticket, cost, memo[i - ticket] + cost);
 			}
 		}
 		
