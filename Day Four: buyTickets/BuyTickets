@@ -1,0 +1,70 @@
+import java.util.Arrays;
+
+public class BuyTickets {
+	public static int buyTickets(int[] dates) {
+		int[] tickets = {1, 7, 30};
+		
+		int numDays = 30;
+		int[] memo = new int[numDays + 1];
+		Arrays.fill(memo, Integer.MAX_VALUE);
+		memo[0] = 0;
+				
+		for (int i = 1; i <= numDays; i++) {
+			boolean isTravelDate = false;
+			
+			for (int date : dates) {
+				if (i == date) {
+					isTravelDate = true;
+					break;
+				}
+			}
+			
+			if (isTravelDate == false) {
+				memo[i] = memo[i - 1];
+				continue;
+			}
+			
+			for (int ticket : tickets) {
+				System.out.println(ticket);
+				if (i < ticket) {
+					break;
+				}
+				
+				int cost;
+				switch (ticket) {
+				case 1:
+					cost = 2;
+					break;
+				case 7:
+					cost = 7;
+					break;
+				case 30:
+					cost = 25;
+					break;
+
+				default:
+					cost = Integer.MAX_VALUE;
+					break;
+				}
+				
+				memo[i] = Math.min(memo[i], memo[i - ticket] + cost);
+				
+				System.out.printf("memo[i:%d] = %d\n", i, memo[i]);
+				System.out.printf("memo[%d - %d] + %d = %d\n", i, ticket, cost, memo[i - ticket] + cost);
+			}
+		}
+		
+		return memo[numDays];
+		
+	}
+	
+	public static void main(String[] args) {
+		int[] dates = {1, 2, 8, 9, 14, 20};
+		
+		
+		int result = buyTickets(dates);
+		
+		System.out.println("Minimum cost to buy tickets for the whole trip is : " + result);
+	}
+	
+}
